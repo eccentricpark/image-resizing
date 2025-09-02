@@ -8,13 +8,15 @@ import { GlobalResponseInterceptor } from "../middlewares/global-response-interc
 import { AppController } from "../app.controller";
 import { ResizingController } from "../features/resizing/resizing.controller";
 import { ConversionController } from "../features/conversion/conversion.controller";
+import { ResizingConversionController } from "../features/resizing-conversion/resizing-conversion.controller";
 
 export async function setExpress(app: express.Application) {
   useContainer(Container);
   const controllers = [
     AppController, 
     ResizingController,
-    ConversionController
+    ConversionController,
+    ResizingConversionController
   ];
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));

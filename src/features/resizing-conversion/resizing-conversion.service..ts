@@ -1,5 +1,5 @@
 import { Service } from "typedi";
-import { ResizeOptions, parseOptions, getState} from '../../shared/sharpUtils';
+import { ResizeOptions, parseOptions, getState, getFilename} from '../../shared/sharpUtils';
 import sharp from 'sharp';
 
 @Service()
@@ -17,7 +17,7 @@ export class ResizingConversionService{
   }
 
   private async resizeToConvert(file: Express.Multer.File, width: number, height: number, state: number){
-    const filename = this.getFilename(file.originalname);
+    const filename = getFilename(file.originalname);
     const path = `./_converted/${filename}`;
     switch(state){
       case 0:
@@ -46,9 +46,5 @@ export class ResizingConversionService{
       default:
         return "width, height 둘 중 하나는 자연수를 넣어 이 새꺄";
     }
-  }
-
-  private getFilename(originalname: string){
-    return `${originalname.substring(0, originalname.lastIndexOf('.'))}.jpg`
   }
 }

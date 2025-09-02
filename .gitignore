@@ -8,6 +8,7 @@ log/
 *.spec.ts
 uploads/
 docker_builder.bat
+docker_builder_arm64.bat
 .vscode/
 .json/
 Dockerfile

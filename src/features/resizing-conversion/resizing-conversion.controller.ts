@@ -1,6 +1,6 @@
 // user.controller.ts
-import { JsonController, Post, UploadedFiles, Body } from 'routing-controllers';
-import { Express } from 'express';
+import { JsonController, Post, UploadedFiles, Body, Res } from 'routing-controllers';
+import { Express, Response } from 'express';
 import { Service } from 'typedi';
 import { memoryOption } from '../../shared/multer';
 import { ResizingConversionService } from './resizing-conversion.service';
@@ -29,9 +29,14 @@ export class ResizingConversionController {
    * 다운로드 기능을 지원하도록 구현해야 한다.
    */
   @Post('/multiple-download')
-  async downloadFiles(
+  async resizeAndArchive(
     @UploadedFiles('images', memoryOption) files: Express.Multer.File[],
-    @Body() options: ResizeOptions){
-    return await this.service.resizeToConvertFiles(files, options);
+    @Body() options: ResizeOptions,
+    @Res() res: Response){
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Disposition', 'attachment; filename=converted_images.zip');
+    await this.service.resizeAndArchive(res, files, options);
+
+    return res;
   }
 }

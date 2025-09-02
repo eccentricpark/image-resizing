@@ -1,6 +1,7 @@
 // src/interceptors/GlobalResponseInterceptor.ts
 import { Interceptor, InterceptorInterface, Action } from 'routing-controllers';
 import { Service } from 'typedi';
+import { Stream } from 'stream';
 
 /**
  * Controller에서 return한 값을 { data: ..., message: 'OK' } 형태로 감싸주는 인터셉터
@@ -10,6 +11,16 @@ import { Service } from 'typedi';
 @Interceptor()
 export class GlobalResponseInterceptor implements InterceptorInterface {
   intercept(action: Action, content: any) {
+
+    // 스트림이면 그대로 보낸다.
+    if (content instanceof Stream) {
+      return content;
+    }
+
+    // 이미 응답을 보냈으면 그냥 끝낸다.
+    if (action.response.headersSent){
+      return;
+    }
     // 이미 (data, message) 구조라면 그대로 반환하거나,
     // 반환 구조 커스터마이징 하고 싶으면 여기서 처리
     // if (content && (content.data || content.message)) {

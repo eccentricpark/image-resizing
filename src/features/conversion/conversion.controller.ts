@@ -1,7 +1,7 @@
 // user.controller.ts
 import { JsonController, Post, UploadedFile, UploadedFiles } from 'routing-controllers';
 import { Service } from 'typedi';
-import { memoryOption } from '../../config/multer';
+import { memoryOption } from '../../shared/multer';
 import { ConversionService } from './conversion.service';
 
 @Service()

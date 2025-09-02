@@ -8,7 +8,7 @@ import { ResizeOptions } from '../../shared/sharpUtils';
 
 @Service()
 @JsonController('/resizing-conversion')
-export class ResizingController {
+export class ResizingConversionController {
   constructor(
     private readonly service: ResizingConversionService
   ) {}

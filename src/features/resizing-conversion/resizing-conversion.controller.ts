@@ -13,7 +13,7 @@ export class ResizingConversionController {
     private readonly service: ResizingConversionService
   ) {}
 
-  @Post('/all-in-one')
+  @Post('/multiple')
   async resizeToConvertFiles(
     @UploadedFiles('images', memoryOption) files: Express.Multer.File[],
     @Body() options: ResizeOptions){

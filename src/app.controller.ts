@@ -9,6 +9,6 @@ export class AppController {
 
   @Get('/')
   sayHello() {
-    return `Hello world!`;
+    return `Welcome to resizing-server`;
   }
 }
